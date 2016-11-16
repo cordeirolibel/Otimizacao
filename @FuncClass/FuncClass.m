@@ -34,6 +34,8 @@ classdef FuncClass<handle
         end
         #definido em armijo.m
         passo =  armijo(obj,gama,fracN)
+        #definido em aurea.m
+        [passo,cortes,phiT] = aurea(obj,epsilon, corte)
         #gradiente da funcao definida
         function out = grad(obj, x)
           out = obj.func(x,1);

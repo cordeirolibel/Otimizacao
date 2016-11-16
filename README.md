@@ -1,4 +1,4 @@
-# Otimiza-o
+# Otimizacao
 Algorítimos de Otimização Irrestrita (Octave)
 
 Busca Exata - Seção Áurea - https://github.com/cordeirolibel/SecaoAurea

@@ -18,6 +18,11 @@ function [passo,cortes,phiT] = aurea(obj,epsilon, corte)
 
 format long;
 
+#se direcao nao esta definida
+if(!obj.testDire())
+  return
+end
+
 cortes = [];
 phiT = [];
 
@@ -75,5 +80,8 @@ while (b-a)>epsilon
 end
 
 passo = (u+v)/2;
+obj.passo = passo;
 
 clear a b u v k p n_ouro
+
+end

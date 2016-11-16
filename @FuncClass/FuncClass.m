@@ -9,6 +9,7 @@ classdef FuncClass<handle
         funcX_save
         gradX_ponto
         funcX_ponto
+        passo
     end
     properties (SetAccess = public)
         pontoX
@@ -20,7 +21,10 @@ classdef FuncClass<handle
             obj.pontoX = pontoX;
             if(nargin==3)
               obj.direcao =direcao;
+            else 
+              obj.direcao = [];
             end
+            obj.passo = -1;
         end
         #imprimindo todos os dados do objeto
         function print(obj)
@@ -67,6 +71,10 @@ classdef FuncClass<handle
         end
         #funcao phi auxiliar
         function out = phi(obj, passos)
+          #testa se direcao estao definidos
+          if(!obj.testDire())
+            return
+          end
           out = [];
           for passo = passos
             out = [out,obj.func(obj.pontoX + passo*obj.direcao)] ;
@@ -74,6 +82,10 @@ classdef FuncClass<handle
         end
         #definindo taylor1
         function out = taylor1(obj,passos)
+          #testa se direcao estao definidos
+          if(!obj.testDire())
+            return
+          end
           out = [];
           for passo = passos
             out = [out,obj.funcX()+ passo*obj.gradX()*obj.direcao];
@@ -81,19 +93,47 @@ classdef FuncClass<handle
         end
         #definindo Ntaylor1
         function out = Ntaylor1(obj,passos,fracN)
+          #testa se direcao estao definidos
+          if(!obj.testDire())
+            return
+          end
           out = [];
           for passo = passos
             out = [out,obj.funcX()+ fracN*passo*obj.gradX()*obj.direcao];
           end
         end
-        #
         function setDirecao(obj,direcao)
           obj.direcao = direcao;
         end
+        #testa se passo esta definido
+        function out = testPasso(obj)
+          if(obj.passo==-1)
+            disp("Erro: Passo nao esta definido");
+            out = false;
+          else 
+            out = true;
+          end
+        end
+        #testa se direcao esta definido
+        function out = testDire(obj)
+          if(isequal(obj.direcao,[]))
+            disp("Erro: Direcao nao esta definida");
+            out = false;
+          else 
+            out = true;
+          end
+        end
         #atualiza pontoX
         function out = updateX(obj,passo)
+          #testa se passo ou direcao estao definidos
+          if(!obj.testPasso()||!obj.testDire())
+            return
+          end
           out = obj.pontoX + passo*obj.direcao;
           obj.pontoX= out;
+          #clear
+          obj.passo = -1;
+          obj.direcao = [];
         end
     end
 end

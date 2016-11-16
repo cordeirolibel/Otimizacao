@@ -4,6 +4,11 @@
 
 function passo =  armijo(obj,gama,fracN)
 
+#se direcao nao esta definida
+if(!obj.testDire())
+  return
+end
+
 #Entrada invalida
 if (fracN<=0) || (fracN>=1)
   disp('fracN invalido, valida no intervalo (0,1)')
@@ -25,5 +30,7 @@ while obj.phi(passo) > func_aux(passo)
   k+=1;
   passo = gama*passo;
 end
+
+obj.passo = passo;
 
 end

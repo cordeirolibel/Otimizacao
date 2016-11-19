@@ -1,4 +1,4 @@
-%>>>>>>>> Busca Exata - Metodo da Secao Aurea <<<<<<<<<<%
+%>>>>>>>>         Metodo do Gradiente         <<<<<<<<<<%
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
@@ -40,6 +40,8 @@ classdef FuncClass<handle
         passo =  armijo(obj,gama,fracN)
         #definido em aurea.m
         [passo,cortes,phiT] = aurea(obj,epsilon, corte)
+        #metodo do gradiente
+        direcao =  gradiente(obj)
         #gradiente da funcao definida
         function out = grad(obj, x)
           out = obj.func(x,1);

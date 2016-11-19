@@ -12,6 +12,8 @@ if ordem==0
   y = (X(1)-2)^2/2+(X(2)-1)^2;  
 elseif ordem==1 
   y = [(X(1)-2) , 2*(X(2)-1)];
+elseif ordem==2 
+  y = [1,0;0,2];
 else
   error('Ordem da derivada inexistente');
 end

@@ -1,4 +1,4 @@
-%>>>>>>>> Busca Inexata - condicao de Armijo  <<<<<<<<<<%
+%>>>>>>>>        Otimização Irrestrita        <<<<<<<<<<%
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
@@ -8,8 +8,9 @@ gama = 0.8;
 fracN = 1/4;
 
 teste = FuncClass(func,pontoX);
-
-teste.direcao = -teste.gradX()';
+#set direcao
+d = teste.gradiente();
+#set passo
 passo = teste.armijo(gama,fracN);
 #teste.updateX(passo);
 

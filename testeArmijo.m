@@ -8,10 +8,12 @@ gama = 0.8;
 fracN = 1/4;
 
 teste = FuncClass(func,pontoX);
+
 #set direcao
-d = teste.gradiente();
+d = teste.newton();
 #set passo
 passo = teste.armijo(gama,fracN);
+#atualiza novo Xk
 #teste.updateX(passo);
 
 %========Plots=======%

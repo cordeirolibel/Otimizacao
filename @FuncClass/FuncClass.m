@@ -7,8 +7,10 @@ classdef FuncClass<handle
         funcao
         gradX_save
         funcX_save
+        hessianaX_save
         gradX_ponto
         funcX_ponto
+        hessianaX_ponto
         passo
     end
     properties (SetAccess = public)
@@ -42,6 +44,12 @@ classdef FuncClass<handle
         [passo,cortes,phiT] = aurea(obj,epsilon, corte)
         #metodo do gradiente
         direcao =  gradiente(obj)
+        #metodo de Newton
+        direcao = newton(obj)
+        #hessiana da funcao definida
+        function out = hessiana(obj, x)
+          out = obj.func(x,2);
+        end
         #gradiente da funcao definida
         function out = grad(obj, x)
           out = obj.func(x,1);
@@ -52,6 +60,15 @@ classdef FuncClass<handle
             ordem = 0;
           end
           out = feval(obj.funcao,x,ordem);
+        end
+        #hessiana da funcao definida no pontoX
+        function out = hessianaX(obj)
+          #verifica se nao foi calculado
+          if(!isequal(obj.pontoX, obj.hessianaX_ponto))
+            obj.hessianaX_save = obj.hessiana(obj.pontoX);
+            obj.hessianaX_ponto = obj.pontoX;
+          end
+          out = obj.hessianaX_save;
         end
         #gradiente da funcao definida no pontoX
         function out = gradX(obj)
@@ -84,7 +101,7 @@ classdef FuncClass<handle
         end
         #definindo taylor1
         function out = taylor1(obj,passos)
-          #testa se direcao estao definidos
+          #testa se direcao esta definida
           if(!obj.testDire())
             return
           end
@@ -95,7 +112,7 @@ classdef FuncClass<handle
         end
         #definindo Ntaylor1
         function out = Ntaylor1(obj,passos,fracN)
-          #testa se direcao estao definidos
+          #testa se direcao esta definida
           if(!obj.testDire())
             return
           end

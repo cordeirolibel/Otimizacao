@@ -1,4 +1,4 @@
-%>>>>>>>>         Metodo do Gradiente         <<<<<<<<<<%
+%>>>>>>>>        Otimizacao Irrestrita        <<<<<<<<<<%
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
@@ -20,11 +20,14 @@ classdef FuncClass<handle
     methods(SetAccess = public)
         function obj = FuncClass(funcao,pontoX,direcao)
             obj.funcao = funcao;
-            obj.pontoX = pontoX;
-            if(nargin==3)
-              obj.direcao =direcao;
-            else 
+            obj.pontoX = pontoX;  
+            
+            if(nargin==1)
               obj.direcao = [];
+            elseif(nargin==2)
+              obj.direcao = [];
+            else%nargin==3, direcao definida
+              obj.direcao =direcao;
             end
             obj.passo = -1;
         end
@@ -33,8 +36,6 @@ classdef FuncClass<handle
           disp(["Funcao: ",obj.funcao]);
           disp("PontoX: ");
           obj.pontoX
-          disp(["Gama: ",num2str(obj.gama)]);
-          disp(["FracN: ",num2str(obj.fracN)]);
           disp("Direcao: ");
           obj.direcao
         end
@@ -125,30 +126,40 @@ classdef FuncClass<handle
           obj.direcao = direcao;
         end
         #testa se passo esta definido
-        function out = testPasso(obj)
+        function out = testPasso(obj,message)
+          if(nargin==1)#habilitado mensagem de erro
+            message = true;
+          end
           if(obj.passo==-1)
-            disp("Erro: Passo nao esta definido");
+            if(message)
+              disp("Erro: Passo nao esta definido");
+            end
             out = false;
           else 
             out = true;
           end
         end
         #testa se direcao esta definido
-        function out = testDire(obj)
+        function out = testDire(obj,message)
+          if(nargin==1)
+            message = true;
+          end
           if(isequal(obj.direcao,[]))
-            disp("Erro: Direcao nao esta definida");
+            if(message)
+              disp("Erro: Direcao nao esta definida");
+            end
             out = false;
           else 
             out = true;
           end
         end
         #atualiza pontoX
-        function out = updateX(obj,passo)
+        function out = updateX(obj)
           #testa se passo ou direcao estao definidos
           if(!obj.testPasso()||!obj.testDire())
             return
           end
-          out = obj.pontoX + passo*obj.direcao;
+          out = obj.pontoX + obj.passo*obj.direcao;
           obj.pontoX= out;
           #clear
           obj.passo = -1;

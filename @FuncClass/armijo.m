@@ -8,7 +8,12 @@ function passo =  armijo(obj,gama,fracN)
 if(!obj.testDire())
   return
 end
-
+if(nargin==2)
+  fracN = 0.25;
+elseif(nargin==1)
+  gama = 0.8;
+  fracN = 0.25;
+end
 #Entrada invalida
 if (fracN<=0) || (fracN>=1)
   disp('fracN invalido, valida no intervalo (0,1)')

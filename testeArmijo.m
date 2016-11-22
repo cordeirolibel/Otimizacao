@@ -10,7 +10,7 @@ fracN = 1/4;
 teste = FuncClass(func,pontoX);
 
 #set direcao
-d = teste.newton();
+d = teste.gradiente();
 #set passo
 passo = teste.armijo(gama,fracN);
 #atualiza novo Xk

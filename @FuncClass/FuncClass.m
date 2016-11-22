@@ -60,7 +60,11 @@ classdef FuncClass<handle
           if(nargin == 2)
             ordem = 0;
           end
-          out = feval(obj.funcao,x,ordem);
+          try
+            out = feval(obj.funcao,x,ordem);
+          catch
+            out = obj.funcao.func(x,ordem);
+          end
         end
         #hessiana da funcao definida no pontoX
         function out = hessianaX(obj)
@@ -108,7 +112,7 @@ classdef FuncClass<handle
           end
           out = [];
           for passo = passos
-            out = [out,obj.funcX()+ passo*obj.gradX()*obj.direcao];
+            out = [out,obj.funcX()+ passo*obj.gradX()'*obj.direcao];
           end
         end
         #definindo Ntaylor1
@@ -119,7 +123,7 @@ classdef FuncClass<handle
           end
           out = [];
           for passo = passos
-            out = [out,obj.funcX()+ fracN*passo*obj.gradX()*obj.direcao];
+            out = [out,obj.funcX()+ fracN*passo*obj.gradX()'*obj.direcao];
           end
         end
         function setDirecao(obj,direcao)

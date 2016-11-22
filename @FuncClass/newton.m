@@ -8,6 +8,10 @@
 
 function direcao = newton(obj)
   #using LU factorization 
-  direcao = linsolve(obj.hessianaX(),-obj.gradX());
+  try
+    direcao = linsolve(obj.hessianaX(),-obj.gradX());
+  catch
+    direcao = (-obj.gradX()\obj.hessianaX())';
+  end
   obj.direcao = direcao;
 end

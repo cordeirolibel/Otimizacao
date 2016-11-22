@@ -29,7 +29,7 @@ classdef QuadFunc<handle
         obj.A = rand(n,n);
         obj.A = obj.A*obj.A';#restricao para ser semi-definida positiva
         obj.b = rand(n,1);
-        obj.c = rand(n,1);
+        obj.c = rand(1);
         obj.n = n;
         out = n;
       end

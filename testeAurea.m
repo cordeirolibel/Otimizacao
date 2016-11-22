@@ -25,4 +25,4 @@ hold off
 
 %plot intervalos
 figure(2);
-plot(phiT);
+plot(phiT,'linewidth',2.0);

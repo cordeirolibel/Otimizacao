@@ -4,7 +4,7 @@
 
 function direcao =  gradiente(obj)
 
-direcao = -obj.gradX()';
+direcao = -obj.gradX();
 obj.direcao = direcao;
 
 end

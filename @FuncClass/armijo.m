@@ -24,7 +24,7 @@ format long;
 
 #definindo func_aux
 function [y] = func_aux(p)
-  y = obj.funcX()+(fracN*p*obj.gradX()*obj.direcao) ;
+  y = obj.funcX()+(fracN*p*obj.gradX()'*obj.direcao) ;
 end
 
 passo = 1;

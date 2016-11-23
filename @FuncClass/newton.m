@@ -7,7 +7,7 @@
 %  
 
 function direcao = newton(obj)
-  #using LU factorization 
+  %using LU factorization 
   try
     direcao = linsolve(obj.hessianaX(),-obj.gradX());
   catch

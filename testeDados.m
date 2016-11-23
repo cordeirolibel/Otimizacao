@@ -7,7 +7,7 @@ dados;
 n_testes
 for i = 1:1:n_testes
   [i,testes(i).funcX()]
-  #se direcao nao foi definida
+  %se direcao nao foi definida
   if(!testes(i).testDire(false))
     testes(i).gradiente();
   end

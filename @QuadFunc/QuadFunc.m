@@ -21,22 +21,22 @@ classdef QuadFunc<handle
           obj.create(n);
         end
       end
-      #criacao das variaveis da funcao
+      %criacao das variaveis da funcao
       function out = create(obj, n)
         if(nargin==1)
             n = floor(rand()*100)+1;
         end
         obj.A = rand(n,n);
-        obj.A = obj.A*obj.A';#restricao para ser semi-definida positiva
+        obj.A = obj.A*obj.A';%restricao para ser semi-definida positiva
         obj.b = rand(n,1);
         obj.c = rand(1);
         obj.n = n;
         out = n;
       end
-      function out = func(obj, x, ordem)# xeR^n
+      function out = func(obj, x, ordem)% xeR^n
         if(isequal(obj.A,[]))
-           disp("Erro:Funcao ainda nao foi criada");
-           disp("     Tente usar obj.create(n)");
+           disp('Erro:Funcao ainda nao foi criada');
+           disp('     Tente usar obj.create(n)');
            return;
         end
         %ordem nao informado

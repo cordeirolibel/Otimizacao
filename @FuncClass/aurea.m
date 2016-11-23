@@ -18,7 +18,7 @@ function [passo,cortes,phiT] = aurea(obj,epsilon, corte)
 
 format long;
 
-#se direcao nao esta definida
+%se direcao nao esta definida
 if(!obj.testDire())
   return
 end
@@ -31,7 +31,7 @@ if(nargin==2)
 end
 
 p =  0.01;
-#procura o intervalo a, b
+%procura o intervalo a, b
 a = 0;
 s = p;
 b = 2*p;
@@ -57,7 +57,7 @@ while (b-a)>epsilon
     b = v;
     v = u;
     u = (a+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
-    if(corte)#save corte
+    if(corte)%save corte
       cortes = [cortes,b];
     end
     phiV = phiU;
@@ -67,14 +67,14 @@ while (b-a)>epsilon
     a = u;
     u = v;
     v = (b+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
-    if(corte)#save corte
+    if(corte)%save corte
       cortes = [cortes,a];
     end
     phiU = phiV;
     phiV = obj.phi(v);
   end
   k = k+1;
-  if(corte)#save corte
+  if(corte)%save corte
       phiT(k) = obj.phi((u+v)/2);
   end
 end

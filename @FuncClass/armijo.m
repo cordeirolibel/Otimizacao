@@ -2,35 +2,35 @@
 %     Gustavo Cordeiro - UTFPR - outubro de 2016        %
 %-------------------------------------------------------%
 
-function passo =  armijo(obj,gama,fracN)
+function passo =  armijo(obj,gama,eta)
 
-#se direcao nao esta definida
+%se direcao nao esta definida
 if(!obj.testDire())
   return
 end
 if(nargin==2)
-  fracN = 0.25;
+  eta = 0.25;
 elseif(nargin==1)
   gama = 0.8;
-  fracN = 0.25;
+  eta = 0.25;
 end
-#Entrada invalida
-if (fracN<=0) || (fracN>=1)
-  disp('fracN invalido, valida no intervalo (0,1)')
+%Entrada invalida
+if (eta<=0) || (eta>=1)
+  disp('eta invalido, valida no intervalo (0,1)')
   break;
 end
 
 format long;
 
-#definindo func_aux
+%definindo func_aux
 function [y] = func_aux(p)
-  y = obj.funcX()+(fracN*p*obj.gradX()'*obj.direcao) ;
+  y = obj.funcX()+(eta*p*obj.gradX()'*obj.direcao) ;
 end
 
 passo = 1;
 
 k=0;
-#Busca do passo
+%Busca do passo
 while obj.phi(passo) > func_aux(passo)
   k+=1;
   passo = gama*passo;

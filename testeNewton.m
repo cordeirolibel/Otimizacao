@@ -6,20 +6,20 @@ pontoX = rand(n,1);
 teste = FuncClass(funcTeste,pontoX);
 
 n
-disp("Antes, f(x) = ");
+disp('Antes, f(x) = ');
 teste.funcX()
 
-#set direcao
+%set direcao
 d = teste.newton();
-#set passo
+%set passo
 passo = teste.armijo();
-#atualiza novo Xk
+%atualiza novo Xk
 teste.updateX(passo);
 
-disp("Depois, f(x) = ");
+disp('Depois, f(x) = ');
 teste.funcX()
 
-#===================PLOT===============
+%===================PLOT===============
 if(n==2)
   
   x = -5:0.5:5;

@@ -2,7 +2,7 @@
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
-teste = FuncClass("ex4_5",[1;0]);
+teste = FuncClass('ex4_5',[1;0]);
 
 teste.setDirecao([3;1]);
 [passo,cortes,phiT] = teste.aurea(0.01,true);

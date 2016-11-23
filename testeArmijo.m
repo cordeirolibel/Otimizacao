@@ -2,47 +2,47 @@
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
-func = "ex4_5";
+func = 'ex4_5';
 pontoX = [1;0];
 gama = 0.8;
-fracN = 1/4;
+eta = 1/4;
 
 teste = FuncClass(func,pontoX);
 
-#set direcao
+%set direcao
 d = teste.gradiente();
-#set passo
-passo = teste.armijo(gama,fracN);
-#atualiza novo Xk
-#teste.updateX(passo);
+%set passo
+passo = teste.armijo(gama,eta);
+%atualiza novo Xk
+%teste.updateX(passo);
 
 %========Plots=======%
 clf;
 
 x = 0:0.001:1;
 
-#calcula funcoes
+%calcula funcoes
 phiY = teste.phi(x);
 taylorY = teste.taylor1(x);
-NtaylorY = teste.Ntaylor1(x,fracN);
+NtaylorY = teste.Ntaylor1(x,eta);
 
-#plot funcao principal
+%plot funcao principal
 plot(x,phiY,'linewidth',2.0,'color','b')
 
-#salva limites da funcao
+%salva limites da funcao
 limitesX = xlim();
 limitesY = ylim();
 
-#plot demais funcoes
+%plot demais funcoes
 hold on
 plot(x,taylorY,'linewidth',2.0,'color','r')
 plot(x,NtaylorY,'linewidth',2.0,'color','g')
 line([passo,passo],[limitesY(1),limitesY(2)],'color','k','linewidth',2.0);
 
-#retorna aos limites da funcao principal
+%retorna aos limites da funcao principal
 xlim(limitesX);
 ylim(limitesY);
 hold off
-#==============
+%==============
 
-#clear teste;
+%clear teste;

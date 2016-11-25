@@ -1,3 +1,4 @@
+
 %>>>>>>>>    Criando funcao quadratica        <<<<<<<<<<%
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
@@ -13,21 +14,28 @@ classdef QuadFunc<handle
         n
     end
     methods(SetAccess = public)
-      function obj = QuadFunc(n)
-        if(nargin==0)
+      function obj = QuadFunc()
           obj.A = [];
           n=0;
-        else
-          obj.create(n);
-        end
       end
-      %criacao das variaveis da funcao
-      function out = create(obj, n)
+      %criacao das variaveis da funcao, dimensao n, auto valor min e max
+      function out = create(obj, n, av_min, av_max)
+        %definindo variaveis
         if(nargin==1)
-            n = floor(rand()*100)+1;
+          n = floor(rand()*100)+1;
+          av_min = 1;
+          av_max = 100;
+        elseif(nargin==2)
+          av_min = 1;
+          av_max = 100;
         end
-        obj.A = rand(n,n);
-        obj.A = obj.A*obj.A';%restricao para ser semi-definida positiva
+        %==========Criando funcao
+        %criando matriz
+        u = rand(n,1);
+        v = av_min+(av_max-av_min)*(u-min(u))/(max(u)-min(u));
+        Q = orth(randn(n,n));%gerando matriz ortogonal
+        obj.A = Q'*diag(v)*Q;
+        %demais parametros
         obj.b = rand(n,1);
         obj.c = rand(1);
         obj.n = n;

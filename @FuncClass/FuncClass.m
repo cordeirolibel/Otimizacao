@@ -104,7 +104,18 @@ classdef FuncClass<handle
             out = [out,obj.func(obj.pontoX + passo*obj.direcao)] ;
           end
         end
-        %definindo taylor1
+        %definindo taylor2 de phi no ponto x
+        function out = taylor2(obj,passos)
+          %testa se direcao esta definida
+          if(!obj.testDire())
+            return
+          end
+          out = [];
+          for passo = passos
+            out = [out,obj.funcX()+ passo*obj.gradX()'*obj.direcao];
+          end
+        end
+        %definindo taylor1 de phi no pontoX
         function out = taylor1(obj,passos)
           %testa se direcao esta definida
           if(!obj.testDire())
@@ -115,7 +126,7 @@ classdef FuncClass<handle
             out = [out,obj.funcX()+ passo*obj.gradX()'*obj.direcao];
           end
         end
-        %definindo Ntaylor1
+        %definindo Ntaylor1 de phi no pontoX
         function out = Ntaylor1(obj,passos,fracN)
           %testa se direcao esta definida
           if(!obj.testDire())

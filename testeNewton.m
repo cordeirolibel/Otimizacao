@@ -38,10 +38,16 @@ if(n==2)
   
   clf;
   figure(1);
-  surf(x,y,z');
+  grafico = surf(x,y,z');
   
   hold on
   line([ant(1),prox(1)],[ant(2),prox(2)],[f_ant,f_prox],'color','k','linewidth',4.0);
+  
+  %pausa para ajustar o grafico
+  %disp ('press to continue') ;
+  %pause () ;
+  
+  print ('img/newton','-djpg');
   hold off
   
   %======2 grafico, curvas de nivel
@@ -51,6 +57,7 @@ if(n==2)
   
   hold on
   line([ant(1),prox(1)],[ant(2),prox(2)],'color','k','linewidth',3.0);
+  print ('img/newton2','-djpg');
   hold off
 end
 

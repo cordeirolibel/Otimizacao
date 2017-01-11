@@ -5,6 +5,8 @@
 dados1;
 
 n_testes
+disp('i   f(x)    f(x+1)')
+
 for i = 1:1:n_testes
   ant = testes(i).funcX();
   %se direcao nao foi definida

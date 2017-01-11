@@ -42,6 +42,15 @@ line([passo,passo],[limitesY(1),limitesY(2)],'color','k','linewidth',2.0);
 %retorna aos limites da funcao principal
 xlim(limitesX);
 ylim(limitesY);
+
+%legendas
+leg = legend('\phi(t)',
+             'p(t)',
+             'q(t)',
+             't');
+set (leg, 'fontsize', 14);
+
+print ('img/armijo','-djpg');
 hold off
 %==============
 

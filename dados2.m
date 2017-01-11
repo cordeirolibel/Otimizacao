@@ -1,3 +1,6 @@
+%>>>>>>>>        Otimizacao Irrestrita        <<<<<<<<<<%
+%     Gustavo Cordeiro - UTFPR - novembro de 2016       %
+%-------------------------------------------------------%
 
 %numero de funcoes criadas
 n_testes = 50; 

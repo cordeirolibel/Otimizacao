@@ -11,7 +11,7 @@ function direcao = newton(obj)
   try
     direcao = linsolve(obj.hessianaX(),-obj.gradX());
   catch
-    direcao = (-obj.gradX()\obj.hessianaX())';
+    direcao = (-obj.hessianaX()\obj.gradX());
   end
   obj.direcao = direcao;
 end

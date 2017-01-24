@@ -3,7 +3,7 @@
 %-------------------------------------------------------%
 
 %numero de funcoes criadas
-n_testes = 50; 
+n_testes = 300; 
 %dimensao
 n = 2; 
 

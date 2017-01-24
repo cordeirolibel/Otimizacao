@@ -47,7 +47,7 @@ if(n==2)
   %disp ('press to continue') ;
   %pause () ;
   
-  print ('img/newton','-djpg');
+  %print ('img/newton','-djpg');
   hold off
   
   %======2 grafico, curvas de nivel
@@ -57,7 +57,7 @@ if(n==2)
   
   hold on
   line([ant(1),prox(1)],[ant(2),prox(2)],'color','k','linewidth',3.0);
-  print ('img/newton2','-djpg');
+  %print ('img/newton2','-djpg');
   hold off
 end
 

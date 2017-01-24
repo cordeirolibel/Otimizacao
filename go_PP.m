@@ -56,24 +56,11 @@ for in=1:nn   % varia n
                 k = 0;
                 func = FuncClass(funcTeste,pontoX);
                 switch variant(i)
-                       case 1     
-                       for k=1:kmax
-                         func.gradiente();
-                         func.armijo();                  
-                         func.updateX();
-                         if(mean(func.gradX())<prec)
-                            break;
-                         end
-                       end
-                    
+                       case 1 
+                        k = func.solve('gradiente','armijo',kmax,prec);                        
                        case 2 
                        for k=1:kmax
-                         func.newton();
-                         func.armijo();                  
-                         func.updateX();
-                         if(mean(func.gradX())<prec)
-                            break;
-                         end
+                         k = func.solve('newton','armijo',kmax,prec);
                        end
                 end
                

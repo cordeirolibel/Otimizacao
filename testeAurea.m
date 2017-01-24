@@ -22,7 +22,7 @@ for i = 1:5
   line([cortes(i),cortes(i)],[0,teste.phi(cortes(i))],'color','k','linewidth',2.0);
   text(cortes(i),teste.phi(cortes(i))/2,int2str(i));
 end
-print ('img/aurea','-djpg');
+%print ('img/aurea','-djpg');
 hold off
 
 %plot intervalos
@@ -33,5 +33,5 @@ plot(phiT,'linewidth',2.0);
 xlabel('Interacoes','FontSize',16)
 ylabel('Passo t','FontSize',16)
 
-print ('img/aurea2','-djpg');
+%print ('img/aurea2','-djpg');
 hold off

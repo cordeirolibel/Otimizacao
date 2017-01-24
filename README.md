@@ -1,10 +1,18 @@
 # Otimizacao
 Algorítimos de Otimização Irrestrita (Octave)
 
-Busca Exata - Seção Áurea - https://github.com/cordeirolibel/SecaoAurea
+Busca Exata - Seção Áurea 
 
-Busca Inexata - Condição de Armijo - https://github.com/cordeirolibel/Armijo
+Busca Inexata - Condição de Armijo 
 
 Método do Gradiente (Cauchy)
 
 Método de Newton
+
+---------------------------------
+
+Plots
+
+Performace profiles
+
+Parallel computing 

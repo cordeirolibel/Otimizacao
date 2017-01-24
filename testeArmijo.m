@@ -50,7 +50,7 @@ leg = legend('\phi(t)',
              't');
 set (leg, 'fontsize', 14);
 
-print ('img/armijo','-djpg');
+%print ('img/armijo','-djpg');
 hold off
 %==============
 

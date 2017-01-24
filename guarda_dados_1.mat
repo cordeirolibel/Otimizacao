@@ -1,15 +1,16 @@
-# Created by Octave 4.0.0, Tue Jan 24 11:05:59 2017 BRST <cordeiro@cordeiro-Vostro-5470>
+# Created by Octave 4.0.0, Tue Jan 24 12:03:58 2017 BRST <cordeiro@cordeiro-Vostro-5470>
 # name: it
 # type: matrix
 # rows: 100
 # columns: 2
+ 20 1
+ 20 1
  1 1
  1 1
  1 1
- 1 1
- 1 1
- 1 1
+ 17 1
  19 1
+ 18 1
  1 1
  1 1
  1 1
@@ -18,6 +19,7 @@
  1 1
  1 1
  1 1
+ 9 1
  1 1
  1 1
  1 1
@@ -30,6 +32,7 @@
  1 1
  1 1
  1 1
+ 17 1
  1 1
  1 1
  1 1
@@ -70,7 +73,6 @@
  1 1
  1 1
  1 1
- 3 1
  1 1
  1 1
  1 1
@@ -78,9 +80,7 @@
  1 1
  1 1
  1 1
- 1 1
- 1 1
- 1 1
+ 13 1
  1 1
  1 1
  1 1

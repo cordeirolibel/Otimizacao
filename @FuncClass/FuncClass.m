@@ -47,6 +47,8 @@ classdef FuncClass<handle
         direcao =  gradiente(obj)
         %metodo de Newton
         direcao = newton(obj)
+        %definido em solve.m
+        k = solve(obj,dirc,passo,kmax,prec)
         %hessiana da funcao definida
         function out = hessiana(obj, x)
           out = obj.func(x,2);

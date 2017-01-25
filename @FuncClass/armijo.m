@@ -37,5 +37,6 @@ while obj.phi(passo) > func_aux(passo)
 end
 
 obj.passo = passo;
+obj.passo_state = true;
 
 end

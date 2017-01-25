@@ -10,7 +10,7 @@ eta = 1/4;
 teste = FuncClass(func,pontoX);
 
 %set direcao
-d = teste.gradiente();
+d = teste.gradienteConjugado();
 %set passo
 passo = teste.armijo(gama,eta);
 %atualiza novo Xk

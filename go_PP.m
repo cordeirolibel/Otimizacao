@@ -24,8 +24,9 @@ nprob=nn*nlmin*nlmax; %% total de problemas
 % Choice of Methods
 % 1 = Cauchy
 % 2 = Newton
+% 3 = Gradiente Conjugado
 
-variant=[1 2];
+variant=[1 2 3];
 nmet=length(variant);
 
 % -------------------------------------------------------------------------
@@ -57,11 +58,11 @@ for in=1:nn   % varia n
                 func = FuncClass(funcTeste,pontoX);
                 switch variant(i)
                        case 1 
-                        k = func.solve('gradiente','armijo',kmax,prec);                        
-                       case 2 
-                       for k=1:kmax
-                         k = func.solve('newton','armijo',kmax,prec);
-                       end
+                          k = func.solve(kmax,prec,'gradiente','armijo');                        
+                       case 2
+                          k = func.solve(kmax,prec,'newton','armijo');
+                       case 3
+                          k = func.solve(kmax,prec,'gradiente conjugado','armijo'); 
                 end
                
                 % Guarda para performance profile

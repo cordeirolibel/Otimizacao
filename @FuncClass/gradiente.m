@@ -6,5 +6,6 @@ function direcao =  gradiente(obj)
 
 direcao = -obj.gradX();
 obj.direcao = direcao;
+obj.direcao_state = true;
 
 end

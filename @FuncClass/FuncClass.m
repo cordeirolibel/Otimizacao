@@ -11,25 +11,35 @@ classdef FuncClass<handle
         gradX_ponto
         funcX_ponto
         hessianaX_ponto
-        passo
+        passo_state
+        direcao_state
+        beta
     end
     properties (SetAccess = public)
         pontoX
         direcao
+        passo
+        k
+        n
     end
     methods(SetAccess = public)
         function obj = FuncClass(funcao,pontoX,direcao)
             obj.funcao = funcao;
             obj.pontoX = pontoX;  
-            
+            obj.n = size(pontoX)(1);
             if(nargin==1)
               obj.direcao = [];
+              obj.direcao_state = false;
             elseif(nargin==2)
               obj.direcao = [];
+              obj.direcao_state = false;
             else%nargin==3, direcao definida
               obj.direcao =direcao;
+              obj.direcao_state = true;
             end
-            obj.passo = -1;
+            obj.passo_state = false;
+            obj.beta = 0;
+            obj.k=0;
         end
         %imprimindo todos os dados do objeto
         function print(obj)
@@ -47,6 +57,8 @@ classdef FuncClass<handle
         direcao =  gradiente(obj)
         %metodo de Newton
         direcao = newton(obj)
+        %metodo do gradiente conjulgado
+        direcao =  gradienteConjugado(obj)
         %definido em solve.m
         k = solve(obj,dirc,passo,kmax,prec)
         %hessiana da funcao definida
@@ -130,13 +142,18 @@ classdef FuncClass<handle
         end
         function setDirecao(obj,direcao)
           obj.direcao = direcao;
+          obj.direcao_state = true;
+        end
+        function setPasso(obj,passo)
+          obj.passo = direcao;
+          obj.passo_state = true;
         end
         %testa se passo esta definido
         function out = testPasso(obj,message)
           if(nargin==1)%habilitado mensagem de erro
             message = true;
           end
-          if(obj.passo==-1)
+          if(obj.passo_state==false)
             if(message)
               disp('Erro: Passo nao esta definido');
             end
@@ -150,7 +167,7 @@ classdef FuncClass<handle
           if(nargin==1)
             message = true;
           end
-          if(isequal(obj.direcao,[]))
+          if(obj.direcao_state ==false)
             if(message)
               disp('Erro: Direcao nao esta definida');
             end
@@ -165,11 +182,19 @@ classdef FuncClass<handle
           if(!obj.testPasso()||!obj.testDire())
             return
           end
+          grad_ant = obj.gradX()'*obj.gradX();
           out = obj.pontoX + obj.passo*obj.direcao;
           obj.pontoX= out;
+          %para o gradiente conjugado
+          if(grad_ant!=0)
+            obj.beta = (obj.gradX()'*obj.gradX())/(grad_ant);
+          else
+            obj.beta = 0;
+          end
           %clear
-          obj.passo = -1;
-          obj.direcao = [];
+          obj.passo_state = false;
+          obj.direcao_state = false;
+          obj.k+=1;
         end
     end
 end

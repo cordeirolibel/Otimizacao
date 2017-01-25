@@ -14,4 +14,5 @@ function direcao = newton(obj)
     direcao = (-obj.hessianaX()\obj.gradX());
   end
   obj.direcao = direcao;
+  obj.direcao_state = true;
 end

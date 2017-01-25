@@ -81,6 +81,7 @@ end
 
 passo = (u+v)/2;
 obj.passo = passo;
+obj.passo_state = true;
 
 clear a b u v k p n_ouro
 

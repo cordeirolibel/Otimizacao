@@ -11,7 +11,7 @@ passo
 %========Plots=======%
 
 clf;
-
+figure(1);
 %plot phi e cortes
 x = 0:0.001:1;
 y = teste.phi(x);

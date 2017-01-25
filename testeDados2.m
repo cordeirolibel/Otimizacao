@@ -14,8 +14,8 @@ prec = 0.01;
 %divisao dos problemas
 MIN = 10;
 MAX = n_testes;
-PASSO = floor(MAX/10);
-MED = 3; %calcula MED vezes e tira a media dos tempos
+PASSO = floor(MAX/5);
+MED = 1; %calcula MED vezes e tira a media dos tempos
 
 %parametros para os graficos
 ns = MIN:PASSO:MAX;
@@ -32,7 +32,7 @@ for n = ns
   for i = 1:MED
     tic
     for i = 1:n
-      solve(testes(i),'newton','armijo',100,0.01);
+      solve(testes(i),100,0.01,'newton','armijo');
     end
     tempo = [tempo,toc];
   end
@@ -42,7 +42,7 @@ for n = ns
   %paralelo
   for i = 1:MED
     tic
-    pararrayfun(4,@(u) solve(u,'newton','armijo',100,0.01),testes(1:n),"ChunksPerProc", 1,"VerboseLevel", 0);
+    pararrayfun(4,@(u) solve(u,100,0.01,'newton','armijo'),testes(1:n),"ChunksPerProc", 1,"VerboseLevel", 0);
     tempo = [tempo,toc];
   end
   t_parallel = [t_parallel,mean(tempo)];

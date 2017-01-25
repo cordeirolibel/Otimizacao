@@ -32,7 +32,7 @@ end
 % % -------------------------------------------------------------------------
 figure(1)
 perf(it,2)
-leg = legend('Cauchy','Newton',4);
+leg = legend('Cauchy','Newton','Grad Conj',4);
 set (leg, 'fontsize', 14,'Location','SouthEast');
 title('Performance profile - Iteraçoes','fontsize', 14)
 

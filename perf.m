@@ -49,7 +49,7 @@ for s = 1: ns
  [xs,ys] = stairs(r(:,s),[1:np]/np);
  option = ['-' colors(s) markers(s)];
  % plot(xs,ys,option,'MarkerSize',3);%original
- plot(xs,ys,option,'MarkerSize',7,'linewidth',1.5);
+ plot(xs,ys,option,'MarkerSize',7,'linewidth',1.2);
  hold on;
 end
 

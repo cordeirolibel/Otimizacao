@@ -9,6 +9,8 @@ Método do Gradiente (Cauchy)
 
 Método de Newton
 
+Método de Gradiente Conjugado
+
 ---------------------------------
 
 Plots

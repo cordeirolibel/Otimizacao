@@ -31,8 +31,11 @@ end
 
 % % -------------------------------------------------------------------------
 figure(1)
+
 perf(it,2)
 leg = legend('Cauchy','Newton','Grad Conj',4);
 set (leg, 'fontsize', 14,'Location','SouthEast');
-title('Performance profile - Iteraçoes','fontsize', 14)
+title('Performance profile - Iteracoes','fontsize', 14);
+%print ('img/pp','-djpg');
+hold off;
 

@@ -9,12 +9,12 @@ Método do Gradiente (Cauchy)
 
 Método de Newton
 
-Método de Gradiente Conjugado
+Método do Gradiente Conjugado
 
 ---------------------------------
 
 Plots
 
-Performace profiles
+Performace Profiles
 
-Parallel computing 
+Parallel Computing 

@@ -20,7 +20,7 @@ hold on
 #for i = 1:size(cortes,2)
 for i = 1:5
   line([cortes(i),cortes(i)],[0,teste.phi(cortes(i))],'color','k','linewidth',2.0);
-  text(cortes(i),teste.phi(cortes(i))/2,int2str(i));
+  text(cortes(i)+0.001,teste.phi(cortes(i))/2,int2str(i),'fontsize',12);
 end
 %print ('img/aurea','-djpg');
 hold off

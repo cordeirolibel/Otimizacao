@@ -46,7 +46,7 @@ end
 n_ouro = (1+sqrt(5))/2;
 
 u = (a+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
-v = (b+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
+v = a+b-u;
 phiU = obj.phi(u);
 phiV = obj.phi(v);
 k =0;
@@ -56,7 +56,7 @@ while (b-a)>epsilon
   if phiU < phiV
     b = v;
     v = u;
-    u = (a+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
+    u = a+b-v;
     if(corte)%save corte
       cortes = [cortes,b];
     end
@@ -66,7 +66,7 @@ while (b-a)>epsilon
   else
     a = u;
     u = v;
-    v = (b+n_ouro*a+n_ouro*b)/(2*n_ouro+1);
+    v = a+b-u;
     if(corte)%save corte
       cortes = [cortes,a];
     end

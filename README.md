@@ -28,10 +28,13 @@ Parallel Computing
 Octave>=3.8.0
 
 Terminal:
-sudo apt-get install libgnutls-dev
+
+	sudo apt-get install libgnutls-dev
 
 Octave:
-pkg install -forge struct
-pkg install -forge parallel
+
+	pkg install -forge struct
+
+	pkg install -forge parallel
 
 

@@ -25,8 +25,9 @@ nprob=nn*nlmin*nlmax; %% total de problemas
 % 1 = Cauchy
 % 2 = Newton
 % 3 = Gradiente Conjugado
+% 4 = Quase-Newton
 
-variant=[1 2 3];
+variant=[1 2 3 4];
 nmet=length(variant);
 
 % -------------------------------------------------------------------------
@@ -62,7 +63,9 @@ for in=1:nn   % varia n
                        case 2
                           k = func.solve(kmax,prec,'newton','armijo');
                        case 3
-                          k = func.solve(kmax,prec,'gradiente conjugado','armijo'); 
+                          k = func.solve(kmax,prec,'gradiente conjugado','armijo');
+                       case 4
+                          k = func.solve(kmax,prec,'quase-newton','armijo'); 
                 end
                
                 % Guarda para performance profile

@@ -1,8 +1,10 @@
 %%%% Para recuperar resultados e fazer graficos PP
 
 % --------------------------- METODOS ---------------------------------------
-% 1 = Cauchy 
-% 2 = Newton 
+% 1 = Cauchy
+% 2 = Newton
+% 3 = Gradiente Conjugado
+% 4 = Quase-Newton
 % -------------------------------------------------------------------------
 
 % -------------------------------------------------------------------------
@@ -33,7 +35,7 @@ end
 figure(1)
 
 perf(it,2)
-leg = legend('Cauchy','Newton','Grad Conj',4);
+leg = legend('Cauchy','Newton','Grad Conj','Quase-Newt',4);
 set (leg, 'fontsize', 14,'Location','SouthEast');
 title('Performance profile - Iteracoes','fontsize', 14);
 %print ('img/pp','-djpg');

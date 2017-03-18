@@ -14,7 +14,8 @@ prec = 0.01;
 %divisao dos problemas
 MIN = 10;
 MAX = n_testes;
-PASSO = floor(MAX/5);
+N_PASSOS = 5;
+PASSO = floor((MAX-MIN)/N_PASSOS);
 MED = 1; %calcula MED vezes e tira a media dos tempos
 
 %parametros para os graficos
@@ -66,4 +67,4 @@ ylabel('Tempo(s)','FontSize',16);
 %print ('img/paralelo','-djpg');
 hold off;
 
-clear t_serial t_parallel ns 
+%clear t_serial t_parallel ns funcTeste testes

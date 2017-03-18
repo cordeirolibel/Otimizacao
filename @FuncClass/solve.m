@@ -3,7 +3,13 @@
 %-------------------------------------------------------%
 
 %dirc = metodo para direcao 
+%   |newton
+%   |gradiente
+%   |gradiente conjugado
+%   |quase-newton
 %passo = metodo para passo
+%   |armijo
+%   |aurea
 %kmax = numero maximo de interacoes
 %prec = precisao de parada
 function k = solve(obj,kmax,prec,dirc,passo)
@@ -74,6 +80,30 @@ function k = solve(obj,kmax,prec,dirc,passo)
         case 'aurea'
           for k=1:kmax
              obj.gradienteConjugado();
+             obj.aurea(prec);                  
+             obj.updateX();
+             if(mean(obj.gradX())<prec)
+                break;
+             end
+           end
+        otherwise
+          disp(['Erro:',passo,' nao eh um metodo definido']);
+        return
+      end
+    case 'quase-newton'
+      switch passo
+        case 'armijo'
+          for k=1:kmax
+             obj.quaseNewton();
+             obj.armijo();                  
+             obj.updateX();
+             if(mean(obj.gradX())<prec)
+                break;
+             end
+           end
+        case 'aurea'
+          for k=1:kmax
+             obj.quaseNewton();
              obj.aurea(prec);                  
              obj.updateX();
              if(mean(obj.gradX())<prec)

@@ -54,4 +54,4 @@ set (leg, 'fontsize', 14);
 hold off
 %==============
 
-%clear teste;
+clear NtaylorY phiY taylorY x

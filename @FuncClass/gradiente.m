@@ -4,8 +4,12 @@
 
 function direcao =  gradiente(obj)
 
-direcao = -obj.gradX();
-obj.direcao = direcao;
-obj.direcao_state = true;
+  format long;
+  
+  direcao = -obj.gradX();
+  
+  %save
+  obj.direcao = direcao;
+  obj.direcao_state = true;
 
 end

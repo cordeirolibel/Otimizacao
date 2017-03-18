@@ -13,7 +13,10 @@ classdef FuncClass<handle
         hessianaX_ponto
         passo_state
         direcao_state
-        beta
+        beta %para o metodo gradiente conjugado
+        H %aproximacao da inversa da hessiana, para o quaseNewton
+        p %para o quaseNewton
+        q %para o quaseNewton
     end
     properties (SetAccess = public)
         pontoX
@@ -27,10 +30,8 @@ classdef FuncClass<handle
             obj.funcao = funcao;
             obj.pontoX = pontoX;  
             obj.n = size(pontoX)(1);
-            if(nargin==1)
-              obj.direcao = [];
-              obj.direcao_state = false;
-            elseif(nargin==2)
+            %se direcao nao foi definida
+            if(nargin==2)
               obj.direcao = [];
               obj.direcao_state = false;
             else%nargin==3, direcao definida
@@ -39,16 +40,10 @@ classdef FuncClass<handle
             end
             obj.passo_state = false;
             obj.beta = 0;
-            obj.k=0;
+            obj.k = 0;
+            obj.H = 0;
         end
-        %imprimindo todos os dados do objeto
-        function print(obj)
-          disp(['Funcao: ',obj.funcao]);
-          disp('PontoX: ');
-          obj.pontoX
-          disp('Direcao: ');
-          obj.direcao
-        end
+        
         %definido em armijo.m
         passo =  armijo(obj,gama,fracN)
         %definido em aurea.m
@@ -59,16 +54,21 @@ classdef FuncClass<handle
         direcao = newton(obj)
         %metodo do gradiente conjulgado
         direcao =  gradienteConjugado(obj)
+        %metodo do quase newton
+        direcao =  quaseNewton(obj,bfgs)
         %definido em solve.m
         k = solve(obj,dirc,passo,kmax,prec)
+        
         %hessiana da funcao definida
         function out = hessiana(obj, x)
           out = obj.func(x,2);
         end
+        
         %gradiente da funcao definida
         function out = grad(obj, x)
           out = obj.func(x,1);
         end
+        
         %valor da funcao definida de derivada ordem no ponto x
         function out = func(obj, x, ordem)
           if(nargin == 2)
@@ -80,6 +80,7 @@ classdef FuncClass<handle
             out = obj.funcao.func(x,ordem);
           end
         end
+        
         %hessiana da funcao definida no pontoX
         function out = hessianaX(obj)
           %verifica se nao foi calculado
@@ -89,6 +90,7 @@ classdef FuncClass<handle
           end
           out = obj.hessianaX_save;
         end
+        
         %gradiente da funcao definida no pontoX
         function out = gradX(obj)
           %verifica se nao foi calculado
@@ -98,6 +100,7 @@ classdef FuncClass<handle
           end
           out = obj.gradX_save;
         end
+        
         %valor da funcao definida de derivada ordem no pontoX
         function out = funcX(obj)
           %verifica se nao foi calculado
@@ -107,6 +110,7 @@ classdef FuncClass<handle
           end
           out = obj.funcX_save;
         end
+        
         %funcao phi auxiliar
         function out = phi(obj, passos)
           %testa se direcao estao definidos
@@ -118,6 +122,7 @@ classdef FuncClass<handle
             out = [out,obj.func(obj.pontoX + passo*obj.direcao)] ;
           end
         end
+        
         %definindo taylor1 de phi no pontoX
         function out = taylor1(obj,passos)
           %testa se direcao esta definida
@@ -129,6 +134,7 @@ classdef FuncClass<handle
             out = [out,obj.funcX()+ passo*obj.gradX()'*obj.direcao];
           end
         end
+        
         %definindo Ntaylor1 de phi no pontoX
         function out = Ntaylor1(obj,passos,fracN)
           %testa se direcao esta definida
@@ -140,19 +146,23 @@ classdef FuncClass<handle
             out = [out,obj.funcX()+ fracN*passo*obj.gradX()'*obj.direcao];
           end
         end
+        
         function setDirecao(obj,direcao)
           obj.direcao = direcao;
           obj.direcao_state = true;
         end
+        
         function setPasso(obj,passo)
           obj.passo = direcao;
           obj.passo_state = true;
         end
+        
         %testa se passo esta definido
         function out = testPasso(obj,message)
           if(nargin==1)%habilitado mensagem de erro
             message = true;
           end
+          %se passo nao esta definido
           if(obj.passo_state==false)
             if(message)
               disp('Erro: Passo nao esta definido');
@@ -167,6 +177,7 @@ classdef FuncClass<handle
           if(nargin==1)
             message = true;
           end
+          %se direcao nao esta definida
           if(obj.direcao_state ==false)
             if(message)
               disp('Erro: Direcao nao esta definida');
@@ -182,18 +193,29 @@ classdef FuncClass<handle
           if(!obj.testPasso()||!obj.testDire())
             return
           end
-          grad_ant = obj.gradX()'*obj.gradX();
+          
+          %grava dados anteriores
+          gradX_ant = obj.gradX();
+          pontoX_ant = obj.pontoX();
+          
           out = obj.pontoX + obj.passo*obj.direcao;
           obj.pontoX= out;
+          
           %para o gradiente conjugado
-          if(grad_ant!=0)
-            obj.beta = (obj.gradX()'*obj.gradX())/(grad_ant);
+          if(gradX_ant!=0)
+            obj.beta = (obj.gradX()'*obj.gradX())/(gradX_ant'*gradX_ant);
           else
             obj.beta = 0;
           end
+          
+          %para quase-newton
+          obj.p = obj.pontoX() - pontoX_ant;
+          obj.q = obj.gradX()  - gradX_ant;
+          
           %clear
           obj.passo_state = false;
           obj.direcao_state = false;
+          
           obj.k+=1;
         end
     end

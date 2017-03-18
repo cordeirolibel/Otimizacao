@@ -80,6 +80,8 @@ while (b-a)>epsilon
 end
 
 passo = (u+v)/2;
+
+%save
 obj.passo = passo;
 obj.passo_state = true;
 

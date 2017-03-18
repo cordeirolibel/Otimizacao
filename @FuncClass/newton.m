@@ -7,12 +7,17 @@
 %  
 
 function direcao = newton(obj)
-  %using LU factorization 
+
+  format long;
+  
+  %try using LU factorization 
   try
     direcao = linsolve(obj.hessianaX(),-obj.gradX());
   catch
     direcao = (-obj.hessianaX()\obj.gradX());
   end
+  
+  %save
   obj.direcao = direcao;
   obj.direcao_state = true;
 end

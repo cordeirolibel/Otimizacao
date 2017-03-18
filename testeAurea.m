@@ -35,3 +35,5 @@ ylabel('Passo t','FontSize',16)
 
 %print ('img/aurea2','-djpg');
 hold off
+
+clear x y phiT cortes

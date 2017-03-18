@@ -13,3 +13,4 @@ for i=1:1:n_testes
   pontoX = rand(n,1);
   testes(i) = FuncClass(funcTeste(i),pontoX);
 end
+

@@ -211,7 +211,7 @@ classdef FuncClass<handle
           %para quase-newton
           obj.p = obj.pontoX() - pontoX_ant;
           obj.q = obj.gradX()  - gradX_ant;
-          
+    
           %clear
           obj.passo_state = false;
           obj.direcao_state = false;

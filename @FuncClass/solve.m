@@ -13,30 +13,32 @@
 %kmax = numero maximo de interacoes
 %prec = precisao de parada
 function k = solve(obj,kmax,prec,dirc,passo)
-  if(nargin==4)
-    passo = '';
+
+  if(nargin==4) %(default)
+    passo = 'armijo';
   end
+  
   k=0;
   switch dirc
     case 'newton'
       switch passo
         case 'armijo'
           for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
              obj.newton();
              obj.armijo();                  
              obj.updateX();
-             if(mean(obj.gradX())<prec)
-                break;
-             end
            end
         case 'aurea'
           for k=1:kmax
-             obj.newton();
-             obj.aurea(prec);                  
-             obj.updateX();
              if(mean(obj.gradX())<prec)
                 break;
              end
+             obj.newton();
+             obj.aurea(prec);                  
+             obj.updateX();
            end
         otherwise
           disp(['Erro:',passo,' nao eh um metodo definido']);
@@ -46,21 +48,21 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
              obj.gradiente();
              obj.armijo();                  
              obj.updateX();
-             if(mean(obj.gradX())<prec)
-                break;
-             end
            end
         case 'aurea'
           for k=1:kmax
-             obj.gradiente();
-             obj.aurea(prec);                  
-             obj.updateX();
              if(mean(obj.gradX())<prec)
                 break;
              end
+             obj.gradiente();
+             obj.aurea(prec);                  
+             obj.updateX();
            end
         otherwise
           disp(['Erro:',passo,' nao eh um metodo definido']);
@@ -70,21 +72,21 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
              obj.gradienteConjugado();
              obj.armijo();                  
              obj.updateX();
-             if(mean(obj.gradX())<prec)
-                break;
-             end
            end
         case 'aurea'
           for k=1:kmax
-             obj.gradienteConjugado();
-             obj.aurea(prec);                  
-             obj.updateX();
              if(mean(obj.gradX())<prec)
                 break;
              end
+             obj.gradienteConjugado();
+             obj.aurea(prec);                  
+             obj.updateX();
            end
         otherwise
           disp(['Erro:',passo,' nao eh um metodo definido']);
@@ -94,21 +96,21 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
              obj.quaseNewton();
              obj.armijo();                  
              obj.updateX();
-             if(mean(obj.gradX())<prec)
-                break;
-             end
            end
         case 'aurea'
           for k=1:kmax
-             obj.quaseNewton();
-             obj.aurea(prec);                  
-             obj.updateX();
              if(mean(obj.gradX())<prec)
                 break;
              end
+             obj.quaseNewton();
+             obj.aurea(prec);                  
+             obj.updateX();
            end
         otherwise
           disp(['Erro:',passo,' nao eh um metodo definido']);
@@ -118,5 +120,7 @@ function k = solve(obj,kmax,prec,dirc,passo)
       disp(['Erro:',dirc,' nao eh um metodo definido']);
       return 
   end
-  obj.k += k;
+  
+  %obj.k += k;
+  
 end

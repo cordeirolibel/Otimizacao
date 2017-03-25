@@ -16,7 +16,7 @@ MIN = 10;
 MAX = n_testes;
 N_PASSOS = 5;
 PASSO = floor((MAX-MIN)/N_PASSOS);
-MED = 1; %calcula MED vezes e tira a media dos tempos
+MED = 2; %calcula MED vezes e tira a media dos tempos
 
 %parametros para os graficos
 ns = MIN:PASSO:MAX;

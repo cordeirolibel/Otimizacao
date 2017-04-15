@@ -12,7 +12,7 @@ prec=0.001;
 vetorn=[ 5 10 15 20]; 
 nn=length(vetorn);
 % lambda min
-lambdamin=[1 2 3 4 5 ];  %%% 
+lambdamin=[1 2 3 4 5];  %%% 
 nlmin=length(lambdamin);
 % lambda max
 lambdamax=[10 11 12 13 14];  %%% 
@@ -25,9 +25,10 @@ nprob=nn*nlmin*nlmax; %% total de problemas
 % 1 = Cauchy
 % 2 = Newton
 % 3 = Gradiente Conjugado
-% 4 = Quase-Newton
+% 4 = Quase-Newton BFGS
+% 5 = Quase-Newton DFP
 
-variant=[1 2 3 4];
+variant=[1 2 3 4 5];
 nmet=length(variant);
 
 % -------------------------------------------------------------------------
@@ -65,7 +66,9 @@ for in=1:nn   % varia n
                        case 3
                           k = func.solve(kmax,prec,'gradiente conjugado','armijo');
                        case 4
-                          k = func.solve(kmax,prec,'quase-newton','armijo'); 
+                          k = func.solve(kmax,prec,'quase-newton','armijo');
+                       case 5
+                          k = func.solve(kmax,prec,'quase-newton DFP','armijo'); 
                 end
                
                 % Guarda para performance profile

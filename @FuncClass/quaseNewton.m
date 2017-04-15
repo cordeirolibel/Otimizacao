@@ -2,7 +2,7 @@
 %       Gustavo Cordeiro - UTFPR - março de 2017        %
 %-------------------------------------------------------%
 %
-%bfgs = false  -> utiliza o metodo DFG 
+%bfgs = false  -> utiliza o metodo DFP
 %bfgs = true   -> utiliza o metodo BFGS (default)
 
 function direcao = quaseNewton(obj,bfgs)
@@ -10,7 +10,7 @@ function direcao = quaseNewton(obj,bfgs)
   format long;
 
   if(nargin==1)%se nao mencionado utiliza metodo BFGS
-    bfgs = false;
+    bfgs = true;
   end
    
   %dados do objeto, para simplificar a visualização

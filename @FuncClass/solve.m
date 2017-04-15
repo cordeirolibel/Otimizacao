@@ -7,6 +7,7 @@
 %   |gradiente
 %   |gradiente conjugado
 %   |quase-newton
+%   |quase-newton DFP
 %passo = metodo para passo
 %   |armijo
 %   |aurea
@@ -16,6 +17,11 @@ function k = solve(obj,kmax,prec,dirc,passo)
 
   if(nargin==4) %(default)
     passo = 'armijo';
+  end
+  
+  %BFGS ja eh o modo padrao
+  if (strcmp(dirc,'quase-newton BFGS'))
+    dirc = 'quase-newton';
   end
   
   k=0;
@@ -92,14 +98,14 @@ function k = solve(obj,kmax,prec,dirc,passo)
           disp(['Erro:',passo,' nao eh um metodo definido']);
         return
       end
-    case 'quase-newton'
+    case 'quase-newton' %BFGS
       switch passo
         case 'armijo'
           for k=1:kmax
              if(mean(obj.gradX())<prec)
                 break;
              end
-             obj.quaseNewton();
+             obj.quaseNewton(false);
              obj.armijo();                  
              obj.updateX();
            end
@@ -116,11 +122,36 @@ function k = solve(obj,kmax,prec,dirc,passo)
           disp(['Erro:',passo,' nao eh um metodo definido']);
         return
       end
+    case 'quase-newton DFP'
+      switch passo
+        case 'armijo'
+          for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
+             obj.quaseNewton(false);
+             obj.armijo();                  
+             obj.updateX();
+           end
+        case 'aurea'
+          for k=1:kmax
+             if(mean(obj.gradX())<prec)
+                break;
+             end
+             obj.quaseNewton(false);
+             obj.aurea(prec);                  
+             obj.updateX();
+           end
+        otherwise
+          disp(['Erro:',passo,' nao eh um metodo definido']);
+        return
+      end
     otherwise
       disp(['Erro:',dirc,' nao eh um metodo definido']);
       return 
   end
   
-  %obj.k += k;
+  #ajuste - sempre conta 1 a mais
+  k = k-1;
   
 end

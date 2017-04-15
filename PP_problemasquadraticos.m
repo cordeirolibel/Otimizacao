@@ -5,6 +5,7 @@
 % 2 = Newton
 % 3 = Gradiente Conjugado
 % 4 = Quase-Newton
+% 5 = Quase-Newton DFP
 % -------------------------------------------------------------------------
 
 % -------------------------------------------------------------------------
@@ -35,7 +36,7 @@ end
 figure(1)
 
 perf(it,2)
-leg = legend('Cauchy','Newton','Grad Conj','Quase-Newt',4);
+leg = legend('Cauchy','Newton','Grad Conj','BFGS','DFP',4);
 set (leg, 'fontsize', 14,'Location','SouthEast');
 title('Performance profile - Iteracoes','fontsize', 14);
 %print ('img/pp','-djpg');

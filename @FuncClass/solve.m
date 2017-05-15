@@ -30,7 +30,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec) 
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.newton();
@@ -39,7 +40,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
            end
         case 'aurea'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.newton();
@@ -54,7 +56,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.gradiente();
@@ -63,7 +66,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
            end
         case 'aurea'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.gradiente();
@@ -78,7 +82,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.gradienteConjugado();
@@ -87,7 +92,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
            end
         case 'aurea'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.gradienteConjugado();
@@ -102,16 +108,18 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
-             obj.quaseNewton(false);
+             obj.quaseNewton();
              obj.armijo();                  
              obj.updateX();
            end
         case 'aurea'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                 k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.quaseNewton();
@@ -126,7 +134,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
       switch passo
         case 'armijo'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.quaseNewton(false);
@@ -135,7 +144,8 @@ function k = solve(obj,kmax,prec,dirc,passo)
            end
         case 'aurea'
           for k=1:kmax
-             if(mean(obj.gradX())<prec)
+             if(mean(abs(obj.gradX()))<prec)
+                k-=1;#ajuste - sempre conta 1 a mais
                 break;
              end
              obj.quaseNewton(false);
@@ -151,7 +161,7 @@ function k = solve(obj,kmax,prec,dirc,passo)
       return 
   end
   
-  #ajuste - sempre conta 1 a mais
-  k = k-1;
+  
+
   
 end

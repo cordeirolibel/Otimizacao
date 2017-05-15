@@ -36,9 +36,25 @@ end
 figure(1)
 
 perf(it,2)
-leg = legend('Cauchy','Newton','Grad Conj','BFGS','DFP',4);
+leg_text = '';
+for var = variant
+  switch var
+    case 1
+      leg_text = [leg_text;'Cauchy'];
+    case 2
+      leg_text = [leg_text;'Newton'];
+    case 3
+      leg_text = [leg_text;'Grad Conj'];
+    case 4
+      leg_text = [leg_text;'BFGS'];
+    case 5
+      leg_text = [leg_text;'DFP'];
+  end
+end
+leg = legend(leg_text,4);
 set (leg, 'fontsize', 14,'Location','SouthEast');
 title('Performance profile - Iteracoes','fontsize', 14);
-%print ('img/pp','-djpg');
+%print ('img/pp1','-djpg');
+print ('img/pp_mgh3','-djpg');
 hold off;
 

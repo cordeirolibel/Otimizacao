@@ -19,8 +19,8 @@ function direcao = quaseNewton(obj,bfgs)
   q = obj.q;
   
   if(H==0)            %primeira vez, nao tem H anterior
-    %obj.H = eye(obj.n);
-    obj.H = inv(obj.hessianaX());
+    obj.H = eye(obj.n);
+    %obj.H = inv(obj.hessianaX());
   elseif(bfgs==false) %metodo DFP
     obj.H = H + (p*p')/(p'*q) - (H*q*q'*H)/(q'*H*q);
   else                %metodo BFGS

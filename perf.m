@@ -30,6 +30,9 @@ minperf = min(T,[],2);
 
 r = zeros(np,ns);
 for p = 1: np
+  if minperf(p) == 0
+     minperf(p) = 1;
+  end
   r(p,:) = T(p,:)/minperf(p);
 end
 
@@ -45,11 +48,16 @@ r = sort(r);
 % Plot stair graphs with markers.
 
 clf;
+
 for s = 1: ns
  [xs,ys] = stairs(r(:,s),[1:np]/np);
- option = ['-' colors(s) markers(s)];
+ if size(xs)(1) < 100
+  option = ['-' colors(s) markers(s)];
+ else
+  option = [colors(s)];
+ end
  % plot(xs,ys,option,'MarkerSize',3);%original
- plot(xs,ys,option,'MarkerSize',7,'linewidth',1.2);
+ plot(xs,ys,option,'MarkerSize',8,'linewidth',2);
  hold on;
 end
 

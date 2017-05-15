@@ -2,10 +2,10 @@
 %     Gustavo Cordeiro - UTFPR - novembro de 2016       %
 %-------------------------------------------------------%
 
-dados1;
+dados3;
 
 n_testes
-disp('i   f(x)    f(x+1)')
+disp('i   f(x)    f(x+1)    f(x)>f(x+1)')
 
 for i = 1:1:n_testes
   ant = testes(i).funcX();
@@ -15,6 +15,7 @@ for i = 1:1:n_testes
   end
   passo = testes(i).armijo();
   testes(i).updateX();
+  atual = testes(i).funcX()
   %imprimindo resultado
-  [i,ant,testes(i).funcX()]
+  disp([int2str(i),' ',mat2str(ant),' ',mat2str(atual),' ', int2str(ant>atual)])
 end

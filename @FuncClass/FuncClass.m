@@ -17,6 +17,9 @@ classdef FuncClass<handle
         H %aproximacao da inversa da hessiana, para o quaseNewton
         p %para o quaseNewton
         q %para o quaseNewton
+        %para reset
+        first_pontoX
+        first_direcao
     end
     properties (SetAccess = public)
         pontoX
@@ -42,8 +45,26 @@ classdef FuncClass<handle
             obj.beta = 0;
             obj.k = 0;
             obj.H = 0;
+            
+            %para o reset
+            obj.first_pontoX = obj.pontoX;
+            obj.first_direcao = obj.direcao;
         end
         
+        %volta para as configuracoes iniciais 
+        function reset(obj)
+          obj.pontoX = obj.first_pontoX;
+          obj.direcao = obj.first_direcao;
+          obj.passo_state = false;
+          if obj.direcao == []
+            obj.direcao_state = false;
+          else
+            obj.direcao_state = true;
+          end
+          obj.beta = 0;
+          obj.k = 0;
+          obj.H = 0;
+        end
         %definido em armijo.m
         passo =  armijo(obj,gama,fracN)
         %definido em aurea.m

@@ -1,4 +1,5 @@
 # Otimizacao
+<img src="https://image.ibb.co/fqCkE5/gradiente2.jpg" width="500">
 Algorítimos de Otimização Irrestrita (Octave)
 
 Busca Exata - Seção Áurea 
